@@ -7,7 +7,7 @@ module.exports = class MenuController {
 				type: 'list',
 				name: 'mainMenuChoice',
 				message: 'Please choose from an option below: ',
-				choices: ['Add new contact', 'Display Current Time and Date', 'Exit'],
+				choices: ['Add new contact', 'Display Current Time and Date', 'Remind Me', 'Exit'],
 			},
 		];
 		this.contacts = [];
@@ -27,8 +27,14 @@ module.exports = class MenuController {
 					this.getDate();
 					this.main();
 					break;
+				case 'Remind Me':
+					this.clear();
+					this.remindMe();
+					this.main();
+					break;
 				case 'Exit':
 					this.exit();
+					break;
 				default:
 					console.log('Invalid input');
 					this.main();
@@ -55,7 +61,6 @@ module.exports = class MenuController {
 	}
 
 	getContactCount() {
-		//method definition
 		return this.contacts.length;
 	}
 
@@ -74,6 +79,10 @@ module.exports = class MenuController {
 		var month = addZero(currentDate.getMonth() + 1);
 		var year = currentDate.getFullYear();
 		var dateString = 'It\'s ' + hours + ':' + minutes + ':' + seconds + ' on ' + month + '/' + date + '/' + year;
-		console.log(dateString);
+		return(dateString);
+	}
+
+	remindMe() {
+		return('Learning is a life-long pursuit\n\n');
 	}
 };
