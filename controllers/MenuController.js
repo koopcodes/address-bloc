@@ -54,8 +54,18 @@ module.exports = class MenuController {
 		process.exit();
 	}
 
+	getContactCount() {
+		//method definition
+		return this.contacts.length;
+	}
+
 	getDate() {
-    function addZero(i) {if (i < 10) {i = "0" + i;} return i;}
+		function addZero(i) {
+			if (i < 10) {
+				i = '0' + i;
+			}
+			return i;
+		}
 		var currentDate = new Date();
 		var hours = addZero(currentDate.getHours());
 		var minutes = addZero(currentDate.getMinutes());
@@ -63,7 +73,7 @@ module.exports = class MenuController {
 		var date = addZero(currentDate.getDate());
 		var month = addZero(currentDate.getMonth() + 1);
 		var year = currentDate.getFullYear();
-		var dateString = 'It\'s ' + hours + ':' + minutes + ':' + seconds + ' on ' + (month) + '/' + date + '/' + year;
+		var dateString = 'It\'s ' + hours + ':' + minutes + ':' + seconds + ' on ' + month + '/' + date + '/' + year;
 		console.log(dateString);
 	}
 };
