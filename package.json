@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "An application to model an address book in Node",
   "main": "app.js",
-	"repository" :
-  { "type" : "git"
-  , "url" : "git@github.com:koopdev/address-bloc.git"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:koopdev/address-bloc.git"
   },
   "scripts": {
     "test": "export NODE_ENV=test && jasmine"
@@ -13,7 +13,10 @@
   "author": "koop",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^5.1.0"
+    "inquirer": "^5.1.0",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.32.6"
   },
   "devDependencies": {
     "jasmine": "^3.1.0"
