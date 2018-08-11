@@ -7,56 +7,27 @@ module.exports = class MenuController {
 			{
 				type: 'list',
 				name: 'mainMenuChoice',
-				message: 'Please choose from an option below: ',
-				choices: ['Add new contact', 'Display Current Time and Date', 'Remind Me', 'Exit'],
+				message: 'Please choose from an option below:',
+				choices: ['Add new contact', 'Get current time', 'Remind Me', 'Exit'],
 			},
 		];
 		this.book = new ContactController();
 	}
 
-	main() {
-		console.log('Welcome to AddressBloc!');
-		inquirer
-			.prompt(this.mainMenuQuestions)
-			.then(response => {
-				switch (response.mainMenuChoice) {
-				case 'Add new contact':
-					this.addContact();
-					break;
-				case 'Display Current Time and Date':
-					this.clear();
-					this.getDate();
-					this.main();
-					break;
-				case 'Remind Me':
-					this.clear();
-					this.remindMe();
-					this.main();
-					break;
-				case 'Exit':
-					this.exit();
-					break;
-				default:
-					console.log('Invalid input');
-					this.main();
-				}
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	}
-
 	addContact() {
 		this.clear();
-     inquirer.prompt(this.book.addContactQuestions).then((answers) => {
-       this.book.addContact(answers.name, answers.phone).then((contact) => {
-         console.log("Contact added successfully!");
-         this.main();
-       }).catch((err) => {
-         console.log(err);
-         this.main();
-       });
-     });
+		inquirer.prompt(this.book.addContactQuestions).then(answers => {
+			this.book
+				.addContact(answers.name, answers.phone)
+				.then(contact => {
+					console.log('Contact added successfully!');
+					this.main();
+				})
+				.catch(err => {
+					console.log(err);
+					this.main();
+				});
+		});
 	}
 
 	clear() {
@@ -72,7 +43,7 @@ module.exports = class MenuController {
 		return this.contacts.length;
 	}
 
-	getDate() {
+	getTime() {
 		function addZero(i) {
 			if (i < 10) {
 				i = '0' + i;
@@ -87,10 +58,41 @@ module.exports = class MenuController {
 		var month = addZero(currentDate.getMonth() + 1);
 		var year = currentDate.getFullYear();
 		var dateString = 'It\'s ' + hours + ':' + minutes + ':' + seconds + ' on ' + month + '/' + date + '/' + year;
-		return dateString;
+		console.log(dateString);
+		this.main();
+	}
+
+	main() {
+		console.log('Welcome to AddressBloc!');
+		inquirer
+			.prompt(this.mainMenuQuestions)
+			.then(response => {
+				switch (response.mainMenuChoice) {
+				case 'Add new contact':
+					this.addContact();
+					break;
+				case 'Exit':
+					this.exit();
+				case 'Get current time':
+					this.getTime();
+					this.main;
+					break;
+				case 'Remind Me':
+					this.remindMe();
+					this.main;
+					break;
+				default:
+					console.log('Invalid input');
+					this.main();
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
 	}
 
 	remindMe() {
-		return 'Learning is a life-long pursuit\n\n';
+		console.log('Learning is a life-long pursuit');
+		this.main();
 	}
 };

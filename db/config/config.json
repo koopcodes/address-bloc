@@ -14,6 +14,7 @@
     "database": "address-bloc-test",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "logging": true
+    "logging": true,
+		"port": 5432
   }
 }
