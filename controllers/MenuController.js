@@ -18,7 +18,7 @@ module.exports = class MenuController {
 		this.clear();
 		inquirer.prompt(this.book.addContactQuestions).then(answers => {
 			this.book
-				.addContact(answers.name, answers.phone)
+				.addContact(answers.name, answers.phone, answers.email)
 				.then(contact => {
 					console.log('Contact added successfully!');
 					this.main();
@@ -94,5 +94,6 @@ module.exports = class MenuController {
 	remindMe() {
 		console.log('Learning is a life-long pursuit');
 		this.main();
+		return ('Learning is a life-long pursuit');
 	}
 };
