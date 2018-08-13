@@ -8,7 +8,7 @@ module.exports = class MenuController {
 				type: 'list',
 				name: 'mainMenuChoice',
 				message: 'Please choose from an option below:',
-				choices: ['Add new contact', 'Get current time', 'Remind Me', 'Exit'],
+				choices: ['Add new contact', 'View all contacts', 'Get current time', 'Remind Me', 'Exit'],
 			},
 		];
 		this.book = new ContactController();
@@ -30,6 +30,36 @@ module.exports = class MenuController {
 		});
 	}
 
+	main() {
+		console.log('Welcome to AddressBloc!');
+		inquirer
+			.prompt(this.mainMenuQuestions)
+			.then(response => {
+				switch (response.mainMenuChoice) {
+				case 'Add new contact':
+					this.addContact();
+					break;
+				case 'View all contacts':
+					this.getContacts();
+					break;
+				case 'Get current time':
+					this.getTime();
+					break;
+				case 'Remind Me':
+					this.remindMe();
+					break;
+				case 'Exit':
+					this.exit();
+				default:
+					console.log('Invalid input');
+					this.main();
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
 	clear() {
 		console.log('\x1Bc');
 	}
@@ -39,7 +69,30 @@ module.exports = class MenuController {
 		process.exit();
 	}
 
+	getContacts() {
+		this.clear();
+
+		this.book
+			.getContacts()
+			.then(contacts => {
+				for (let contact of contacts) {
+					console.log(`
+          name: ${contact.name}
+          phone number: ${contact.phone}
+          email: ${contact.email}
+          ---------------`);
+				}
+				this.main();
+			})
+			.catch(err => {
+				console.log(err);
+				this.main();
+			});
+	}
+
 	getContactCount() {
+		console.log(this.contacts.length);
+		this.main();
 		return this.contacts.length;
 	}
 
@@ -60,40 +113,12 @@ module.exports = class MenuController {
 		var dateString = 'It\'s ' + hours + ':' + minutes + ':' + seconds + ' on ' + month + '/' + date + '/' + year;
 		console.log(dateString);
 		this.main();
-	}
-
-	main() {
-		console.log('Welcome to AddressBloc!');
-		inquirer
-			.prompt(this.mainMenuQuestions)
-			.then(response => {
-				switch (response.mainMenuChoice) {
-				case 'Add new contact':
-					this.addContact();
-					break;
-				case 'Exit':
-					this.exit();
-				case 'Get current time':
-					this.getTime();
-					this.main;
-					break;
-				case 'Remind Me':
-					this.remindMe();
-					this.main;
-					break;
-				default:
-					console.log('Invalid input');
-					this.main();
-				}
-			})
-			.catch(err => {
-				console.log(err);
-			});
+		return dateString;
 	}
 
 	remindMe() {
 		console.log('Learning is a life-long pursuit');
 		this.main();
-		return ('Learning is a life-long pursuit');
+		return 'Learning is a life-long pursuit';
 	}
 };
