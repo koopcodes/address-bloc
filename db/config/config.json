@@ -5,7 +5,7 @@
     "database": "address-bloc-dev",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "logging": true,
+    "logging": false,
 		"port": 5432
   },
   "test": {
@@ -14,7 +14,7 @@
     "database": "address-bloc-test",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "logging": true,
+    "logging": false,
 		"port": 5432
   }
 }
