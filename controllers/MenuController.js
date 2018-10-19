@@ -136,12 +136,14 @@ module.exports = class MenuController {
 		var month = addZero(currentDate.getMonth() + 1);
 		var year = currentDate.getFullYear();
 		var dateString = 'It\'s ' + hours + ':' + minutes + ':' + seconds + ' on ' + month + '/' + date + '/' + year;
+		this.clear();
 		console.log(dateString);
 		this.main();
 		return dateString;
 	}
 
 	remindMe() {
+		this.clear();
 		console.log('Learning is a life-long pursuit');
 		this.main();
 		return 'Learning is a life-long pursuit';
@@ -155,7 +157,7 @@ module.exports = class MenuController {
 					if (contact === null) {
 						this.clear();
 						console.log('contact not found');
-						this.search();
+						this.main();
 					} else {
 						this.showContact(contact);
 					}
